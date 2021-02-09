@@ -93,11 +93,12 @@ export default {
 
       const newsapi = new NewsApi(config.apiKey);
 
-      const response = await newsapi.v2.everything({
-        q: this.queryInput,
-        language: "en",
-        sortBy: "relevancy",
-      });
+      const response = await this.$axios.$get(
+        "https://newsapi.org/v2/everything",
+        {
+          params: { q: this.queryInput, apiKey: config.apiKey },
+        }
+      );
 
       if (response && response?.status == "ok") {
         const articleData = [];
