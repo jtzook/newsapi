@@ -1,9 +1,19 @@
 <template>
   <div class="page">
     <NavBar />
-    <div class="content flex-1">
-      <slot></slot>
-      {{ config }}
+    <div class="content flex-1 w-9/12">
+      <input
+        type="text"
+        v-model="queryInput"
+        placeholder="Type Something Here to Search NewsMax"
+        :class="inputBoxTailwind"
+        @click="queryInput = ''"
+      />
+      <div class="results">
+        <div v-for="(article, idx) in articles" :key="idx" class="result">
+          {{ article }}
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -17,26 +27,66 @@ export default {
   data() {
     return {
       config,
-      newsapi: new NewsApi(config.apiKey),
       articles: [],
-      query: "bitcoin",
+      queryInput: "japan",
+      // credit: creative-tim.com
+      inputBoxTailwind: [
+        "px-3",
+        "py-3",
+        "text-gray-700",
+        "relative",
+        "bg-white",
+        "bg-white",
+        "rounded",
+        "text-sm",
+        "shadow",
+        "outline-none",
+        "focus:outline-none",
+        "focus:shadow-outline",
+        "w-full pl-10",
+        "w-4/6 max-w-lg",
+      ],
     };
   },
 
   computed: {
-    currentArticles: () => (this.articles.length ? articles.slice(0, 20) : []),
+    currentArticles() {
+      return this.articles && this.articles.length
+        ? this.articles.slice(0, 20)
+        : [];
+    },
   },
 
   async fetch() {
-    this.articles = await this.fetchArticles();
+    if (this.queryInput.length) {
+      this.articles = await this.fetchArticles();
+    }
+  },
+
+  watch: {
+    async queryInput(queryString) {
+      this.articles = [];
+
+      if (queryString.length >= 3) {
+        const newArticles = await this.fetchArticles();
+
+        this.articles = newArticles;
+      }
+    },
   },
 
   methods: {
     async fetchArticles() {
       // To query /v2/everything
       // You must include at least one q, source, or domain
-      const response = await this.newsapi.v2.everything({
-        q: this.query,
+      if (!this.queryInput.length) {
+        return;
+      }
+
+      const newsapi = new NewsApi(config.apiKey);
+
+      const response = await newsapi.v2.everything({
+        q: this.queryInput,
         language: "en",
         sortBy: "relevancy",
       });
@@ -52,8 +102,7 @@ export default {
           });
         });
 
-        console.log("articleData", articleData);
-        // return data?.photos?.photo;
+        return articleData;
       }
 
       return [];
@@ -66,11 +115,13 @@ export default {
 .page {
   margin: 0 auto;
   min-height: 100vh;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: rgba(247, 250, 252);
 }
 
 .content {
