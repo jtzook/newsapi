@@ -9,12 +9,17 @@
         :class="inputBoxTailwind"
         @click="queryInput = ''"
       />
-      <div class="results mt-4">
+
+      <div class="results mt-8 mb-10">
         <Result
-          v-for="(article, idx) in articles"
+          v-for="(article, idx) in currentArticles"
           :key="idx"
           :result="article"
         />
+        <span class="italic text-left mt-6"
+          >Showing {{ currentArticles.length }} of
+          {{ articles.length }} result{{ articles.length == 1 ? "" : "s" }}
+        </span>
       </div>
     </div>
   </div>
@@ -46,7 +51,8 @@ export default {
         "focus:outline-none",
         "focus:shadow-outline",
         "w-full pl-10",
-        "w-4/6 max-w-lg",
+        "w-4/6 max-w-sm md:max-w-lg",
+        "mt-4",
       ],
     };
   },
