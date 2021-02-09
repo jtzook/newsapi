@@ -1,7 +1,7 @@
 <template>
   <div class="page">
     <NavBar />
-    <div class="content flex-1 w-11/12 max-w-xl overflow-hidden">
+    <div class="content flex-1 md:w-11/12 lg:max-w-2xl overflow-hidden">
       <input
         type="text"
         v-model="queryInput"
@@ -9,7 +9,7 @@
         :class="inputBoxTailwind"
         @click="queryInput = ''"
       />
-      <div class="results">
+      <div class="results mt-4">
         <Result
           v-for="(article, idx) in articles"
           :key="idx"
@@ -95,7 +95,7 @@ export default {
 
       if (response && response?.status == "ok") {
         const articleData = [];
-        console.log(response);
+
         response.articles.forEach((a) => {
           articleData.push({
             title: a?.title ?? "",
@@ -129,6 +129,5 @@ export default {
 
 .content {
   margin-top: 60px;
-  padding: 25px 35px;
 }
 </style>

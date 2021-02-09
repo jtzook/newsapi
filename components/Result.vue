@@ -1,10 +1,12 @@
 <template>
-  <div class="result">
-    <div class="article pt-8 flex flex-col text-left">
+  <div
+    class="p-4 m-2 mt-4 flex flex-col md:flex-row bg-white items-center justify-center rounded"
+  >
+    <div class="text-left flex flex-col">
       <a
         v-if="result.title.length && result.articleUrl"
         :href="result.articleUrl"
-        class="text-blue-300"
+        class="text-blue-700"
       >
         {{ result.title }}
       </a>
@@ -18,6 +20,13 @@
         by {{ result.author }}
       </p>
     </div>
+    <div class="p-4">
+      <img
+        :src="result.thumbUrl"
+        alt="article thumbnail"
+        class="thumb border"
+      />
+    </div>
   </div>
 </template>
 
@@ -30,3 +39,12 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.thumb {
+  max-height: 430px;
+  max-width: 200px;
+  object-fit: cover;
+  margin: 10px;
+}
+</style>
