@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import NewsApi from "newsapi";
-
 import config from "../config.js";
 
 export default {
@@ -90,8 +88,6 @@ export default {
       if (!this.queryInput.length) {
         return;
       }
-
-      const newsapi = new NewsApi(config.apiKey);
 
       const response = await this.$axios.$get(
         "https://newsapi.org/v2/everything",
