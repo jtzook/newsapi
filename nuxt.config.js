@@ -44,7 +44,7 @@ export default {
 
   proxy: {
     '/api/': {
-      target: 'https://api.example.com/',
+      target: 'https://newsapi.org/v2/',
       pathRewrite: { '^/api/': '' },
       changeOrigin: true,
     },
