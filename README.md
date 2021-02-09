@@ -13,6 +13,18 @@ Display searchable Google News API results with Nuxt.js (Vue.js) and Tailwind CS
 
 ## Build Setup
 
+Make sure to place your NewsAPI API key in a file called `config.js` in the root directory.
+
+E.g.:
+
+```javascript
+export default {
+    apiKey: <your key here>
+}
+```
+
+Then, use one of the following to run the web server:
+
 ```bash
 # install dependencies
 $ yarn install
