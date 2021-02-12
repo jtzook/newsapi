@@ -1,23 +1,22 @@
 <template>
-  <div class="page">
+  <div class='page'>
     <NavBar />
-    <div class="content flex-1 md:w-11/12 lg:max-w-2xl overflow-hidden">
+    <div class='content flex-1 md:w-11/12 lg:max-w-2xl overflow-hidden'>
       <input
-        type="text"
-        v-model="queryInput"
-        placeholder="Type Something Here to Search NewsMax"
-        :class="inputBoxTailwind"
-        @click="queryInput = ''"
+        v-model='queryInput'
+        type='text'
+        placeholder='Type Something Here to Search NewsMax'
+        :class='inputBoxTailwind'
+        @click='queryInput'
       />
-
-      <div class="results mt-8 mb-10">
+      <div class='results mt-8 mb-10'>
         <Result
-          v-for="(article, idx) in currentArticles"
-          :key="idx"
-          :result="article"
+          v-for='(article, idx) in currentArticles'
+          :key='idx'
+          :result='article'
         />
-        <span class="italic text-left mt-6"
-          >Showing {{ currentArticles.length }} of
+        <span class='italic text-left mt-6'>
+          Showing {{ currentArticles.length }} of
           {{ articles.length }} result{{ articles.length == 1 ? "" : "s" }}
         </span>
       </div>
@@ -55,18 +54,18 @@ export default {
     };
   },
 
+  async fetch() {
+    if (this.queryInput.length) {
+      this.articles = await this.fetchArticles();
+    }
+  },
+
   computed: {
     currentArticles() {
       return this.articles && this.articles.length
         ? this.articles.slice(0, 20)
         : [];
     },
-  },
-
-  async fetch() {
-    if (this.queryInput.length) {
-      this.articles = await this.fetchArticles();
-    }
   },
 
   watch: {
@@ -85,7 +84,7 @@ export default {
     async fetchArticles() {
       // To query /v2/everything
       // You must include at least one q, source, or domain
-      if (!this.queryInput.length) {
+      if (!this.queryInput?.length) {
         return;
       }
 
@@ -96,7 +95,7 @@ export default {
         }
       );
 
-      if (response && response?.status == "ok") {
+      if (response && response?.status === "ok") {
         const articleData = [];
 
         response.articles.forEach((a) => {

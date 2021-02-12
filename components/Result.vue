@@ -25,7 +25,7 @@
         :src="result.thumbUrl"
         alt="article thumbnail"
         class="thumb border"
-      />
+      >
     </div>
   </div>
 </template>
@@ -34,10 +34,10 @@
 export default {
   props: {
     result: {
-      type: Object,
-    },
-  },
-};
+      type: Object
+    }
+  }
+}
 </script>
 
 <style scoped>

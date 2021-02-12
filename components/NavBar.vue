@@ -1,6 +1,8 @@
 <template>
   <div class="nav-bar pr-12 pl-12 fixed bg-blue-500 text-gray-300">
-    <nuxt-link class="flex-1 text-left link" to="/">newsapi search</nuxt-link>
+    <nuxt-link class="flex-1 text-left link" to="/">
+      newsapi search
+    </nuxt-link>
   </div>
 </template>
 
