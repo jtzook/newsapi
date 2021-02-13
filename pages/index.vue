@@ -7,20 +7,27 @@
         type="text"
         placeholder="Type Something Here to Search NewsMax"
         :class="inputBoxTailwind"
-        @click="queryInput"
+        @click="queryInput = ''"
       >
       <div class="results mt-8 mb-10">
-        <Result
-          v-for="(article, idx) in currentArticles"
-          :key="idx"
-          :result="article"
-        />
-        <span class="italic text-left mt-6">
-          Showing {{ currentArticles.length }} of {{ articles.length }} result{{
-            articles.length == 1 ? '' : 's'
-          }}
-        </span>
+        <div v-if="noArticlesFound" class="italic">
+          No articles found for "{{ queryInput }}"
+        </div>
+        <div v-else-if="articles.length">
+          <Result
+            v-for="(article, idx) in currentArticles"
+            :key="idx"
+            :result="article"
+          />
+        </div>
       </div>
+    </div>
+    <div id="footer" class="italic text-left m-6">
+      <span v-if="articles.length">
+        Showing {{ currentArticles.length }} of {{ articles.length }} result{{
+          articles.length == 1 ? '' : 's'
+        }}
+      </span>
     </div>
   </div>
 </template>
@@ -51,7 +58,8 @@ export default {
         'w-full pl-10',
         'w-4/6 max-w-sm md:max-w-lg',
         'mt-4'
-      ]
+      ],
+      loading: false
     }
   },
 
@@ -66,6 +74,10 @@ export default {
       return this.articles && this.articles.length
         ? this.articles.slice(0, 20)
         : []
+    },
+
+    noArticlesFound () {
+      return !this.loading && this.queryInput.length >= 3 && this.articles.length === 0
     }
   },
 
@@ -73,10 +85,12 @@ export default {
     async queryInput (queryString) {
       this.articles = []
 
-      if (queryString?.length >= 3) {
+      if (queryString.length >= 3) {
+        this.loading = !this.loading
         const newArticles = await this.fetchArticles()
 
         this.articles = newArticles
+        this.loading = !this.loading
       }
     }
   },
@@ -85,6 +99,7 @@ export default {
     async fetchArticles () {
       // To query /v2/everything
       // You must include at least one q, source, or domain
+
       if (!this.queryInput?.length) {
         return
       }

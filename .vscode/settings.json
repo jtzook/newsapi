@@ -1,10 +1,10 @@
 {
     "vetur.experimental.templateInterpolationService": true,
-    "editor.defaultFormatter": "octref.vetur",
     "javascript.format.enable": false,
     "html.format.enable": false,
     "[vue]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "javascript.format.insertSpaceBeforeFunctionParenthesis": true
+    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+    "editor.defaultFormatter": "octref.vetur"
 }
