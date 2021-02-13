@@ -1,23 +1,24 @@
-<template>
-  <div class='page'>
+<template lang="ts">
+  <div class="page">
     <NavBar />
-    <div class='content flex-1 md:w-11/12 lg:max-w-2xl overflow-hidden'>
+    <div class="content flex-1 md:w-11/12 lg:max-w-2xl overflow-hidden">
       <input
-        v-model='queryInput'
-        type='text'
-        placeholder='Type Something Here to Search NewsMax'
-        :class='inputBoxTailwind'
-        @click='queryInput'
-      />
-      <div class='results mt-8 mb-10'>
+        v-model="queryInput"
+        type="text"
+        placeholder="Type Something Here to Search NewsMax"
+        :class="inputBoxTailwind"
+        @click="queryInput"
+      >
+      <div class="results mt-8 mb-10">
         <Result
-          v-for='(article, idx) in currentArticles'
-          :key='idx'
-          :result='article'
+          v-for="(article, idx) in currentArticles"
+          :key="idx"
+          :result="article"
         />
-        <span class='italic text-left mt-6'>
-          Showing {{ currentArticles.length }} of
-          {{ articles.length }} result{{ articles.length == 1 ? "" : "s" }}
+        <span class="italic text-left mt-6">
+          Showing {{ currentArticles.length }} of {{ articles.length }} result{{
+            articles.length == 1 ? '' : 's'
+          }}
         </span>
       </div>
     </div>
@@ -25,96 +26,96 @@
 </template>
 
 <script>
-import config from "../config.js";
+import config from '../config.js'
 
 export default {
-  data() {
+  data () {
     return {
       config,
       articles: [],
-      queryInput: "japan",
+      queryInput: 'japan',
       // credit: creative-tim.com
       inputBoxTailwind: [
-        "px-3",
-        "py-3",
-        "text-gray-700",
-        "relative",
-        "bg-white",
-        "bg-white",
-        "rounded",
-        "text-sm",
-        "shadow",
-        "outline-none",
-        "focus:outline-none",
-        "focus:shadow-outline",
-        "w-full pl-10",
-        "w-4/6 max-w-sm md:max-w-lg",
-        "mt-4",
-      ],
-    };
+        'px-3',
+        'py-3',
+        'text-gray-700',
+        'relative',
+        'bg-white',
+        'bg-white',
+        'rounded',
+        'text-sm',
+        'shadow',
+        'outline-none',
+        'focus:outline-none',
+        'focus:shadow-outline',
+        'w-full pl-10',
+        'w-4/6 max-w-sm md:max-w-lg',
+        'mt-4'
+      ]
+    }
   },
 
-  async fetch() {
+  async fetch () {
     if (this.queryInput.length) {
-      this.articles = await this.fetchArticles();
+      this.articles = await this.fetchArticles()
     }
   },
 
   computed: {
-    currentArticles() {
+    currentArticles () {
       return this.articles && this.articles.length
         ? this.articles.slice(0, 20)
-        : [];
-    },
+        : []
+    }
   },
 
   watch: {
-    async queryInput(queryString) {
-      this.articles = [];
+    async queryInput (queryString) {
+      this.articles = []
 
-      if (queryString.length >= 3) {
-        const newArticles = await this.fetchArticles();
+      if (queryString?.length >= 3) {
+        const newArticles = await this.fetchArticles()
 
-        this.articles = newArticles;
+        this.articles = newArticles
       }
-    },
+    }
   },
 
   methods: {
-    async fetchArticles() {
+    async fetchArticles () {
       // To query /v2/everything
       // You must include at least one q, source, or domain
       if (!this.queryInput?.length) {
-        return;
+        return
       }
 
       const response = await this.$axios.$get(
-        "https://newsapi.org/v2/everything",
+        'https://newsapi.org/v2/everything',
         {
-          params: { q: this.queryInput, apiKey: config.apiKey },
+          params: { q: this.queryInput, apiKey: config.apiKey }
         }
-      );
+      )
 
-      if (response && response?.status === "ok") {
-        const articleData = [];
+      if (response && response?.status === 'ok') {
+        const articleData = []
 
         response.articles.forEach((a) => {
           articleData.push({
-            title: a?.title ?? "",
-            description: a?.description ?? "",
-            author: a?.author ?? "",
-            articleUrl: a?.url ?? "",
-            thumbUrl: a?.urlToImage ?? "",
-          });
-        });
+            title: a?.title ?? '',
+            description: a?.description ?? '',
+            author: a?.author ?? '',
+            articleUrl: a?.url ?? '',
+            thumbUrl: a?.urlToImage ?? ''
+          })
+        })
 
-        return articleData;
+        return articleData
       }
 
-      return [];
-    },
-  },
-};
+      return []
+    }
+  }
+}
 </script>
 
 <style lang="postcss">
