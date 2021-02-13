@@ -24,13 +24,7 @@
         </div>
       </div>
     </div>
-    <div id="footer" class="italic text-left m-6">
-      <span v-if="articles.length">
-        Showing {{ currentArticles.length }} of {{ articles.length }} result{{
-          articles.length == 1 ? '' : 's'
-        }}
-      </span>
-    </div>
+    <Footer :currentArticleCount="currentArticles.length" :totalArticleCount="articles.length" />
   </div>
 </template>
 
@@ -57,7 +51,14 @@ export default {
         'w-full md:max-w-xl'
       ],
       resultsStyles: [
-        'mt-16', 'flex-1', 'flex', 'flex-col', 'content-center', 'items-center', 'md:max-w-xl', 'lg:max-w-3xl'
+        'mt-16',
+        'flex-1',
+        'flex',
+        'flex-col',
+        'content-center',
+        'items-center',
+        'md:max-w-xl',
+        'lg:max-w-3xl'
       ],
       loading: false
     }
@@ -77,7 +78,11 @@ export default {
     },
 
     noArticlesFound () {
-      return !this.loading && this.queryInput.length >= 3 && this.articles.length === 0
+      return (
+        !this.loading &&
+        this.queryInput.length >= 3 &&
+        this.articles.length === 0
+      )
     }
   },
 
