@@ -2,7 +2,7 @@
   <div class="page overflow-hidden">
     <NavBar />
     <div :class="resultsStyles">
-      <div id="search-box" class="w-full px-2">
+      <div id="search-box" class="w-full md:w-xl px-2">
         <input
           v-model="queryInput"
           type="text"
@@ -27,7 +27,8 @@
       </div>
 
       <div class="mt-3 mb-10">
-        <div v-if="noArticlesFound" class="italic">
+        <div v-if="apiErrorMessage" class="italic text-left">{{ apiErrorMessage }}</div>
+        <div v-else-if="noArticlesFound" class="italic">
           No articles found for "{{ queryInput }}"
         </div>
         <div v-else-if="articles.length">
@@ -62,7 +63,7 @@ export default {
         'outline-none',
         'focus:outline-none',
         'focus:shadow-outline',
-        'w-full md:max-w-xl'
+        'w-full md:w-xl'
       ],
       resultsStyles: [
         'mt-16',
@@ -72,10 +73,12 @@ export default {
         'content-center',
         'items-center',
         'md:max-w-xl',
-        'lg:max-w-3xl'
+        'lg:max-w-3xl',
+        'w-full'
       ],
       loading: false,
-      sortDirection: ''
+      sortDirection: '',
+      apiErrorMessage: ''
     }
   },
 
@@ -129,34 +132,33 @@ export default {
       // To query /v2/everything
       // You must include at least one q, source, or domain
 
-      if (!this.queryInput.length) {
-        return
+      if (!this.queryInput?.length) {
+        return []
       }
 
-      const response = await this.$axios.$get(
-        'https://newsapi.org/v2/everything',
-        {
+      let response = {}
+      try {
+        response = await this.$axios.$get('https://newsapi.org/v2/everything', {
           params: { q: this.queryInput, apiKey: config.apiKey }
-        }
-      )
-
-      if (response && response.status === 'ok') {
-        const articleData = []
-
-        response.articles.forEach((a) => {
-          articleData.push({
-            title: a?.title ?? '',
-            description: a?.description ?? '',
-            author: a?.author ?? '',
-            articleUrl: a?.url ?? '',
-            thumbUrl: a?.urlToImage ?? ''
-          })
         })
-
-        return articleData
+      } catch (e) {
+        this.apiErrorMessage = e.response.data.message
+        return []
       }
 
-      return []
+      const articleData = []
+
+      response.articles.forEach((a) => {
+        articleData.push({
+          title: a?.title ?? '',
+          description: a?.description ?? '',
+          author: a?.author ?? '',
+          articleUrl: a?.url ?? '',
+          thumbUrl: a?.urlToImage ?? ''
+        })
+      })
+
+      return articleData
     },
 
     onSortButtonClick () {

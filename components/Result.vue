@@ -20,7 +20,7 @@
         by {{ result.author }}
       </p>
     </div>
-    <div class="p-4">
+    <div v-if="result.thumbUrl.length" class="p-4">
       <img
         :src="result.thumbUrl"
         alt="article thumbnail"
