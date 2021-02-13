@@ -11,7 +11,20 @@
           @click="queryInput = ''"
         >
       </div>
-      <div class="mt-4 mb-10">
+
+      <div v-if="articles.length" class="w-full mt-4">
+        <div class="flex flex-row justify-between items-center content-center px-2">
+          <span class="text-sm italic">
+            showing {{ currentArticles.length }} of {{ articles.length }} result{{
+              articles.length == 1 ? '' : 's'
+            }}
+          </span>
+          <SortButton />
+        </div>
+        <hr />
+      </div>
+
+      <div class="mt-3 mb-10">
         <div v-if="noArticlesFound" class="italic">
           No articles found for "{{ queryInput }}"
         </div>
@@ -24,7 +37,6 @@
         </div>
       </div>
     </div>
-    <Footer :currentArticleCount="currentArticles.length" :totalArticleCount="articles.length" />
   </div>
 </template>
 

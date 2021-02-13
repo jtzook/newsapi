@@ -6,5 +6,7 @@
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-    "editor.defaultFormatter": "octref.vetur"
+    "editor.defaultFormatter": "octref.vetur",
+    "editor.formatOnSave": true,
+    "html.format.wrapLineLength": 100
 }
