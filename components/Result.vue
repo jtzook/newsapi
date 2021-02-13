@@ -1,6 +1,6 @@
 <template>
   <div
-    class="p-4 m-2 mt-4 flex flex-col md:flex-row bg-white items-center justify-center rounded"
+    class="p-4 m-2 mt-4 flex flex-col md:flex-row bg-white items-center justify-center rounded shadow"
   >
     <div class="text-left flex flex-col">
       <a

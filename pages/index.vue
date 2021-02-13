@@ -1,15 +1,17 @@
 <template lang="ts">
-  <div class="page">
+  <div class="page overflow-hidden">
     <NavBar />
-    <div class="content flex-1 md:w-11/12 lg:max-w-2xl overflow-hidden">
-      <input
-        v-model="queryInput"
-        type="text"
-        placeholder="Type Something Here to Search NewsMax"
-        :class="inputBoxTailwind"
-        @click="queryInput = ''"
-      >
-      <div class="results mt-8 mb-10">
+    <div :class="resultsStyles">
+      <div id="search-box" class="w-full px-2">
+        <input
+          v-model="queryInput"
+          type="text"
+          placeholder="Type Something Here to Search the News"
+          :class="inputBoxTailwind"
+          @click="queryInput = ''"
+        >
+      </div>
+      <div class="mt-4 mb-10">
         <div v-if="noArticlesFound" class="italic">
           No articles found for "{{ queryInput }}"
         </div>
@@ -41,13 +43,10 @@ export default {
       config,
       articles: [],
       queryInput: 'japan',
-      // credit: creative-tim.com
       inputBoxTailwind: [
-        'px-3',
-        'py-3',
+        'my-2',
         'text-gray-700',
         'relative',
-        'bg-white',
         'bg-white',
         'rounded',
         'text-sm',
@@ -55,9 +54,10 @@ export default {
         'outline-none',
         'focus:outline-none',
         'focus:shadow-outline',
-        'w-full pl-10',
-        'w-4/6 max-w-sm md:max-w-lg',
-        'mt-4'
+        'w-full md:max-w-xl'
+      ],
+      resultsStyles: [
+        'mt-16', 'flex-1', 'flex', 'flex-col', 'content-center', 'items-center', 'md:max-w-xl', 'lg:max-w-3xl'
       ],
       loading: false
     }
@@ -143,9 +143,5 @@ export default {
   align-items: center;
   text-align: center;
   background-color: rgba(247, 250, 252);
-}
-
-.content {
-  margin-top: 60px;
 }
 </style>
