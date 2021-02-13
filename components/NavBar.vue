@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-bar pr-12 pl-12 fixed bg-blue-500 text-gray-300">
+  <div class="nav-bar">
     <nuxt-link class="flex-1 text-left link" to="/">
       newsapi search
     </nuxt-link>
@@ -8,11 +8,15 @@
 
 <style lang="postcss" scoped>
 .nav-bar {
+  @apply pr-12 pl-12 fixed bg-blue-500 text-gray-100
+}
+
+.nav-bar {
   display: flex;
   position: fixed;
   top: 0;
   align-items: center;
-  height: 40px;
+  height: 45px;
   width: 100%;
   border-bottom: 2px solid black;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);

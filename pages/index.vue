@@ -38,7 +38,7 @@ export default {
       articles: [],
       queryInput: 'japan',
       inputBoxTailwind: [
-        'my-2',
+        'my-4',
         'text-gray-700',
         'relative',
         'bg-white',
