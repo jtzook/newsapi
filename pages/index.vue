@@ -19,7 +19,9 @@
               articles.length == 1 ? '' : 's'
             }}
           </span>
-          <SortButton />
+          <div @click="onSortButtonClick">
+            <SortButton :sortDirection="sortDirection" />
+          </div>
         </div>
         <hr />
       </div>
@@ -72,7 +74,8 @@ export default {
         'md:max-w-xl',
         'lg:max-w-3xl'
       ],
-      loading: false
+      loading: false,
+      sortDirection: ''
     }
   },
 
@@ -84,9 +87,18 @@ export default {
 
   computed: {
     currentArticles () {
-      return this.articles && this.articles.length
-        ? this.articles.slice(0, 20)
-        : []
+      const articles =
+        this.articles && this.articles.length ? this.articles.slice(0, 20) : []
+
+      if (!this.sortDirection.length) {
+        return articles
+      }
+
+      const sortFactor = this.sortDirection === 'ascending' ? 1 : -1
+
+      return articles.sort((a, b) =>
+        a.title > b.title ? sortFactor : -sortFactor
+      )
     },
 
     noArticlesFound () {
@@ -117,7 +129,7 @@ export default {
       // To query /v2/everything
       // You must include at least one q, source, or domain
 
-      if (!this.queryInput?.length) {
+      if (!this.queryInput.length) {
         return
       }
 
@@ -128,7 +140,7 @@ export default {
         }
       )
 
-      if (response && response?.status === 'ok') {
+      if (response && response.status === 'ok') {
         const articleData = []
 
         response.articles.forEach((a) => {
@@ -145,6 +157,17 @@ export default {
       }
 
       return []
+    },
+
+    onSortButtonClick () {
+      if (!this.sortDirection) {
+        this.sortDirection = 'ascending'
+
+        return
+      }
+
+      this.sortDirection =
+        this.sortDirection === 'ascending' ? 'descending' : 'ascending'
     }
   }
 }
