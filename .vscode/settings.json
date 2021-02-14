@@ -1,12 +1,13 @@
 {
     "vetur.experimental.templateInterpolationService": true,
-    "javascript.format.enable": false,
-    "html.format.enable": false,
+    "javascript.format.enable": true,
+    "html.format.enable": true,
     "[vue]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
     },
     "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-    "editor.formatOnSave": true,
     "html.format.wrapLineLength": 100,
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "octref.vetur",
+    "editor.formatOnSave": true,
+    "vetur.validation.template": false,
 }

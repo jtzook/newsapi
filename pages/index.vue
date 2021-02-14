@@ -47,7 +47,7 @@
 import config from '../config.js'
 
 export default {
-  data() {
+  data () {
     return {
       config,
       articles: [],
@@ -80,7 +80,7 @@ export default {
   // },
 
   computed: {
-    currentArticles() {
+    currentArticles () {
       const articles =
         this.articles && this.articles.length ? this.articles.slice(0, 20) : []
 
@@ -95,7 +95,7 @@ export default {
       )
     },
 
-    noArticlesFound() {
+    noArticlesFound () {
       return (
         !this.loading &&
         this.queryInput.length >= 3 &&
@@ -105,7 +105,7 @@ export default {
   },
 
   watch: {
-    async queryInput(queryString) {
+    async queryInput (queryString) {
       this.articles = []
 
       if (queryString.length >= 3) {
@@ -119,7 +119,7 @@ export default {
   },
 
   methods: {
-    async fetchArticles() {
+    async fetchArticles () {
       // To query /v2/everything
       // You must include at least one q, source, or domain
 
@@ -152,7 +152,7 @@ export default {
       return articleData
     },
 
-    onSortButtonClick() {
+    onSortButtonClick () {
       if (!this.sortDirection) {
         this.sortDirection = 'ascending'
 
