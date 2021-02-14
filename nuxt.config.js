@@ -29,8 +29,7 @@ export default {
       '@nuxtjs/eslint-module',
       {
         fix: true,
-        overrideConfig: { rules: { 'space-before-function-paren': 'off' } },
-        extends: ['prettier']
+        overrideConfig: { rules: { 'space-before-function-paren': 'off' } }
       }
     ],
     // https://go.nuxtjs.dev/tailwindcss
