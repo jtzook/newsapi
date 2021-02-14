@@ -47,7 +47,7 @@
 import config from '../config.js'
 
 export default {
-  data () {
+  data() {
     return {
       config,
       articles: [],
@@ -55,26 +55,17 @@ export default {
       inputBoxTailwind: [
         'my-4',
         'text-gray-700',
-        'relative',
         'bg-white',
         'rounded',
         'text-sm',
         'shadow',
-        'outline-none',
-        'focus:outline-none',
-        'focus:shadow-outline',
+        'outline-none focus:outline-none focus:shadow-outline',
         'w-full md:w-xl'
       ],
       resultsStyles: [
         'mt-16',
-        'flex-1',
-        'flex',
-        'flex-col',
-        'content-center',
-        'items-center',
-        'md:max-w-xl',
-        'lg:max-w-3xl',
-        'w-full'
+        'flex-1 flex flex-col content-center items-center',
+        'w-full md:max-w-xl lg:max-w-3xl'
       ],
       loading: false,
       sortDirection: '',
@@ -82,14 +73,14 @@ export default {
     }
   },
 
-  async fetch () {
-    if (this.queryInput.length) {
-      this.articles = await this.fetchArticles()
-    }
-  },
+  // async fetch() {
+  //   if (this.queryInput.length) {
+  //     this.articles = await this.fetchArticles()
+  //   }
+  // },
 
   computed: {
-    currentArticles () {
+    currentArticles() {
       const articles =
         this.articles && this.articles.length ? this.articles.slice(0, 20) : []
 
@@ -104,7 +95,7 @@ export default {
       )
     },
 
-    noArticlesFound () {
+    noArticlesFound() {
       return (
         !this.loading &&
         this.queryInput.length >= 3 &&
@@ -114,7 +105,7 @@ export default {
   },
 
   watch: {
-    async queryInput (queryString) {
+    async queryInput(queryString) {
       this.articles = []
 
       if (queryString.length >= 3) {
@@ -128,7 +119,7 @@ export default {
   },
 
   methods: {
-    async fetchArticles () {
+    async fetchArticles() {
       // To query /v2/everything
       // You must include at least one q, source, or domain
 
@@ -161,7 +152,7 @@ export default {
       return articleData
     },
 
-    onSortButtonClick () {
+    onSortButtonClick() {
       if (!this.sortDirection) {
         this.sortDirection = 'ascending'
 

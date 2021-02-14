@@ -25,7 +25,14 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // https://go.nuxtjs.dev/eslint
-    ['@nuxtjs/eslint-module', { fix: true }],
+    [
+      '@nuxtjs/eslint-module',
+      {
+        fix: true,
+        overrideConfig: { rules: { 'space-before-function-paren': 'off' } },
+        extends: ['prettier']
+      }
+    ],
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss'
   ],
@@ -43,11 +50,11 @@ export default {
   },
 
   proxy: {
-    '/api/': {
-      target: 'https://newsapi.org/v2',
-      pathRewrite: { '^/api/': '' },
-      changeOrigin: true
-    }
+    // '/api/': {
+    //   target: 'https://newsapi.org/v2',
+    //   pathRewrite: { '^/api/': '' },
+    //   changeOrigin: true
+    // }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
