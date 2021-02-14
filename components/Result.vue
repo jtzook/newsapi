@@ -4,25 +4,25 @@
   >
     <div class="text-left flex flex-col">
       <a
-        v-if="result.title.length && result.articleUrl"
-        :href="result.articleUrl"
+        v-if="result.title && result.url"
+        :href="result.url"
         class="text-blue-700"
       >
         {{ result.title }}
       </a>
-      <h2 v-else-if="result.title.length && result.articleUrl.length">
+      <h2 v-else-if="result.title && !result.url">
         {{ result.title }}
       </h2>
-      <p v-if="result.description.length" class="pt-2">
+      <p v-if="result.description" class="pt-2">
         {{ result.description }}
       </p>
-      <p v-if="result.author.length" class="pt-2 italic">
+      <p v-if="result.author" class="pt-2 italic">
         by {{ result.author }}
       </p>
     </div>
-    <div v-if="result.thumbUrl.length" class="p-4">
+    <div v-if="result.urlToImage" class="p-4">
       <img
-        :src="result.thumbUrl"
+        :src="result.urlToImage"
         alt="article thumbnail"
         class="thumb border"
       >

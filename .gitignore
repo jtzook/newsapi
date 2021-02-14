@@ -90,4 +90,5 @@ sw.*
 *.swp
 
 config.js
+bootstrap-data.json
 

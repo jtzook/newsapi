@@ -31,7 +31,7 @@
         <div v-else-if="noArticlesFound" class="italic">
           No articles found for "{{ queryInput }}"
         </div>
-        <div v-else-if="articles.length">
+        <div v-else-if="articles">
           <Result
             v-for="(article, idx) in currentArticles"
             :key="idx"
@@ -45,12 +45,13 @@
 
 <script>
 import config from '../config.js'
+import bootstrapData from '../bootstrap-data.json'
 
 export default {
   data () {
     return {
       config,
-      articles: [],
+      articles: bootstrapData.articles,
       queryInput: 'japan',
       inputBoxTailwind: [
         'my-4',
@@ -145,7 +146,7 @@ export default {
           description: a?.description ?? '',
           author: a?.author ?? '',
           articleUrl: a?.url ?? '',
-          thumbUrl: a?.urlToImage ?? ''
+          urlToImage: a?.urlToImage ?? ''
         })
       })
 
