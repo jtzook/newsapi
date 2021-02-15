@@ -42,11 +42,13 @@
       </div>
     </div>
 
-    <t-modal v-model="showModal" :hideCloseButton="true" @before-closed="showModal = false">
+    <ImageModal id="image-modal" :visible="showModal" :imageUrl="thumbUrl" />
+
+    <!-- <t-modal v-model="showModal" :hideCloseButton="true" @before-closed="showModal = false">
       <div v-if="thumbUrl.length" class="flex justify-center items-center">
         <img :src="thumbUrl" alt="thumbnail image full-size" />
       </div>
-    </t-modal>
+    </t-modal> -->
   </div>
 </template>
 
