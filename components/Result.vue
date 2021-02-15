@@ -20,7 +20,11 @@
         by {{ result.author }}
       </p>
     </div>
-    <div v-if="result.urlToImage" class="p-4">
+    <div
+      v-if="result.urlToImage"
+      class="p-4"
+      @click="$emit('thumb-clicked', result.urlToImage)"
+    >
       <img
         :src="result.urlToImage"
         alt="article thumbnail"

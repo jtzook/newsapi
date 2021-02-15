@@ -36,10 +36,17 @@
             v-for="(article, idx) in currentArticles"
             :key="idx"
             :result="article"
+            @thumb-clicked="onThumbnailClick"
           />
         </div>
       </div>
     </div>
+
+    <t-modal v-model="showModal" :hideCloseButton="true" @before-closed="showModal = false">
+      <div v-if="thumbUrl.length" class="flex justify-center items-center">
+        <img :src="thumbUrl" alt="thumbnail image full-size" />
+      </div>
+    </t-modal>
   </div>
 </template>
 
@@ -70,7 +77,9 @@ export default {
       ],
       loading: false,
       sortDirection: '',
-      apiErrorMessage: ''
+      apiErrorMessage: '',
+      thumbUrl: '',
+      showModal: false
     }
   },
 
@@ -145,7 +154,7 @@ export default {
           title: a?.title ?? '',
           description: a?.description ?? '',
           author: a?.author ?? '',
-          articleUrl: a?.url ?? '',
+          url: a?.url ?? '',
           urlToImage: a?.urlToImage ?? ''
         })
       })
@@ -162,6 +171,11 @@ export default {
 
       this.sortDirection =
         this.sortDirection === 'ascending' ? 'descending' : 'ascending'
+    },
+
+    onThumbnailClick (url) {
+      this.thumbUrl = url
+      this.showModal = !this.showModal
     }
   }
 }
