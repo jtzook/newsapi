@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <ImageModal id="image-modal" :visible="showModal" :imageUrl="thumbUrl" />
+    <ImageModal id="image-modal" :visible="showModal" :imageUrl="thumbUrl" @close="showModal = false" />
 
     <!-- <t-modal v-model="showModal" :hideCloseButton="true" @before-closed="showModal = false">
       <div v-if="thumbUrl.length" class="flex justify-center items-center">
