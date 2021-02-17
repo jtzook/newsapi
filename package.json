@@ -18,8 +18,7 @@
     "core-js": "^3.8.3",
     "lodash": "^4.17.20",
     "newsapi": "^2.4.1",
-    "nuxt": "^2.14.12",
-    "vue-tailwind": "^2.1.1"
+    "nuxt": "^2.14.12"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^5.0.0",
