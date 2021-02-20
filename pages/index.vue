@@ -1,4 +1,4 @@
-<template lang="ts">
+<template>
   <div class="page overflow-hidden">
     <NavBar />
     <div :class="resultsStyles">
@@ -13,21 +13,24 @@
       </div>
 
       <div v-if="articles.length" class="w-full mt-4">
-        <div class="flex flex-row justify-between items-center content-center px-2">
+        <div
+          class="flex flex-row justify-between items-center content-center px-2"
+        >
           <span class="text-sm italic">
-            showing {{ currentArticles.length }} of {{ articles.length }} result{{
-              articles.length == 1 ? '' : 's'
-            }}
+            showing {{ currentArticles.length }} of
+            {{ articles.length }} result{{ articles.length == 1 ? '' : 's' }}
           </span>
           <div @click="onSortButtonClick">
-            <SortButton :sortDirection="sortDirection" />
+            <SortButton :sort-direction="sortDirection" />
           </div>
         </div>
-        <hr />
+        <hr>
       </div>
 
       <div class="mt-3 mb-10">
-        <div v-if="apiErrorMessage" class="italic text-left">{{ apiErrorMessage }}</div>
+        <div v-if="apiErrorMessage" class="italic text-left">
+          {{ apiErrorMessage }}
+        </div>
         <div v-else-if="noArticlesFound" class="italic">
           No articles found for "{{ queryInput }}"
         </div>
@@ -42,7 +45,12 @@
       </div>
     </div>
 
-    <ImageModal id="image-modal" :visible="showModal" :imageUrl="thumbUrl" @close="showModal = false" />
+    <ImageModal
+      id="image-modal"
+      :visible="showModal"
+      :image-url="thumbUrl"
+      @close="showModal = false"
+    />
 
     <!-- <t-modal v-model="showModal" :hideCloseButton="true" @before-closed="showModal = false">
       <div v-if="thumbUrl.length" class="flex justify-center items-center">

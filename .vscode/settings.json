@@ -1,13 +1,9 @@
 {
-    "vetur.experimental.templateInterpolationService": true,
-    "javascript.format.enable": true,
-    "html.format.enable": true,
-    "[vue]": {
-        "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
-    },
-    "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
-    "html.format.wrapLineLength": 100,
-    "editor.defaultFormatter": "octref.vetur",
-    "editor.formatOnSave": true,
-    "vetur.validation.template": false,
+  // "[vue]": {
+  //   "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
+  // },
+  // "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  // "html.format.wrapLineLength": 100,
+  // "editor.defaultFormatter": "octref.vetur",
+  // "editor.formatOnSave": true
 }
